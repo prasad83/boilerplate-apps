@@ -17,7 +17,7 @@ class Request {
 		$this->valuemap = $values;
 		$this->rawvaluemap = $rawvalues;
 		if ($stripifgpc && get_magic_quotes_gpc()) {
-			$this->stripslashes_recursive($this->valuemap);
+			$this->valuemap = $this->stripslashes_recursive($this->valuemap);
 		}
 	}
 	
