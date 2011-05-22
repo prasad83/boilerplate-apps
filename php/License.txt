@@ -1,1 +1,6 @@
-Application License copy.
+This code is under Apache License 2.0
+You are free to modify and re-distribute, please
+make sure to maintain the credits to the original author
+(Prasad.A <http://prasadblog.blogspot.com>)
+
+All the best.
