@@ -14,7 +14,7 @@ $.Class.extend("Sample", {
 		this.page = Main.pushPage();
 		var indexTpl = Template.get('Sample.Index');
 		this.page.html(indexTpl.execute());
-		this.page.addClass('main viewport');
+		this.page.addClass('viewport');
 		
 		$('[data-action="again"]', this.page).click($.proxy(this, 'greet'));
 	},
