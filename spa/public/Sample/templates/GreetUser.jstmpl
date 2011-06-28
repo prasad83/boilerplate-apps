@@ -1,0 +1,1 @@
+<div class="bg_info" style="padding: 10px 5px;">A warm welcome to you <%= this.USERNAME %>!</div>

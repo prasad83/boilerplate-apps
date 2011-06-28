@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- License information here. -->
+<page name="index.html" debug="true">
+	
+	<metas>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="user-scalable=yes, initial-scale=1.0" />
+	</metas>
+	
+	<title>[Application Title Here]</title>
+	
+	<styles>
+		<style file="libs/css/reset.css" />
+		
+		<!-- http://lesscss.org -->
+		<style file="assets/app.less" />
+	</styles>
+	
+	<scripts>
+		<script file="libs/lesscss/less.min.js" ifdebug="true" />
+		
+		<script file="libs/jquery/jquery.min.js" />
+		<script file="libs/jquery/jquery.class.min.js" />
+		<script file="libs/jquery/jquery.jqote2.js" />
+		
+		<script file="libs/prasad/jquery.virtualpages.js" />
+		<script file="libs/prasad/Template.js" />
+		<script file="libs/prasad/Datasource.js" />
+		<script file="libs/prasad/jquery.additions.js" />		
+	</scripts>
+	
+	<body><![CDATA[
+		<div class="main"></div>
+	]]></body>
+
+	<components>
+		
+		<component name="Main" folder="public/Main">
+			<classes>
+				<class file="Main.js" />
+			</classes>
+			<templates>
+				<template file="templates/Index.jstmpl" name="Main.Index" />
+			</templates>
+		</component>
+
+		<component name="Sample" folder="public/Sample">
+			<classes>
+				<class file="Sample.js" />
+			</classes>
+			<templates>
+				<template file="templates/index.jstmpl" name="Sample.Index" />
+				<template file="templates/GreetUser.jstmpl" name="Sample.GreetUser" />
+			</templates>
+			<datasources>
+				<datasource file="datasources/UserName.js" name="Sample.UserName" />
+			</datasources>
+		</component>
+		
+	</components>		
+</page>

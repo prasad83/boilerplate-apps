@@ -1,0 +1,26 @@
+Thanks to the contributors of the OpenSource library which
+was helpful in building this application.
+
+* Zend (http://www.zend.com)
+License: http://framework.zend.com/license/new-bsd
+
+* reset.css (http://meyerweb.com/eric/tools/css/reset/)
+License: none (public domain)
+
+* jquery (http://jquery.com)
+License: MIT
+
+* jQote2 (http://aefxx.com/)
+License: DWTFYWT PUBLIC LICENSE v2
+
+* jQuery.Class (http://jupiterjs.com/news/a-simple-powerful-lightweight-class-for-jquery)
+
+* lesscss (http://lesscss.org)
+License: Apache 2.0
+
+* lessphp (http://leafo.net/lessphp)
+License: MIT
+
+* minify (http://code.google.com/p/minify/)
+License: http://www.opensource.org/licenses/bsd-license.php
+

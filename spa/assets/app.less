@@ -1,0 +1,102 @@
+/** 
+ * Macros
+ * Naming format: .macro-...
+ */
+.macro-fontfamily-serif() {
+	font-family: Georgia, Calibri, serif;
+}
+.macro-fontfamily-sans() {
+	font-family: 'Lucida Grande', 'Droid Sans', Arial, sans-serif;
+}
+.macro-shadow(@color:black, @x:1px, @y:1px, @z:1px) {
+	-moz-box-shadow: @x @y @z @color;
+	-webkit-box-shadow: @x @y @z @color;
+}
+.macro-rounded(@r:10px) {
+	-webkit-border-radius: @r @r @r @r;
+	-moz-border-radius: @r @r @r @r;
+}
+
+.macro-pointer() {
+	cursor: hand;
+	cursor: pointer;
+}
+
+/* Use absolute url ... this file gets embedded into HTML file directly */
+.macro-backgroundimage-sprite() {
+	/*background-image: url("images/sprite.png");*/
+}
+
+/** END */
+
+body {
+	font-size: 12px;
+	.macro-fontfamily-sans();
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: bold;
+	}
+	
+	a {
+		color: #0099CC;
+		text-decoration: none;
+		outline: none;
+	}
+
+	h1 { font-size: xx-large; .macro-fontfamily-serif(); }
+	h2 { font-size: x-large; }
+	h3 { font-size: large;    }
+	h4 { font-size: medium;   }
+	h5 { font-size: small;    }
+	h6 { font-size: x-small;  }
+	sup { font-size: xx-small; vertical-align: top; }
+	sub { font-size: xx-small; vertical-align: bottom; }
+	
+	.clearfix {
+		float: none !important;
+		clear: both !important;
+	}
+	
+	.none {
+		display: none !important;
+	}
+	
+	.right {
+		float: right !important;
+	}
+	
+	.left {
+		float: left !important;
+	}
+	
+	.req {
+		color: red;		
+	}
+	
+	.dim {
+		color: #999;
+	}
+	
+	.required {
+		&.error {
+			background: #FFEFBF;
+		}
+	}
+	label.error {
+		display: none !important;
+	}
+	
+	p {
+		margin: 3px;
+		padding: 2px;
+	}
+}
+
+/** Application styling */
+.main {
+	.greetarea {
+		background: yellow;
+		color: darkBlue;
+	}
+}
+
