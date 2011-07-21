@@ -27,6 +27,7 @@ class PageCreator {
 		$this->basedir = dirname(__FILE__) . '/../../';
 		
 		if ($file) {
+			$this->basedir = dirname(realpath($file));			
 			$this->root = simplexml_load_file($file);
 		}
 	}
@@ -63,6 +64,7 @@ class PageCreator {
 		
 		// STYLES
 		foreach($this->root->styles->style as $style) {
+			if (!$this->checkIncludeCondition($style)) continue;
 			$this->outStyle($this->attribute($style, 'file'));
 		}		
 		$this->out('</head><body>');
@@ -77,36 +79,38 @@ class PageCreator {
 		}
 		
 		// COMPONENTS
-		foreach($this->root->components->component as $component) {
-			$this->out('<!-- ' . $this->attribute($component, 'name') . '-->');
-			$folder = $this->attribute($component, 'folder');
-			
-			if (isset($component->classes->class)) {
-				foreach($component->classes->class as $class) {
-					if (!$this->checkIncludeCondition($class)) continue;
-								
-					$filepath = $folder . '/' . $this->attribute($class, 'file');
-					$this->outScript($filepath);
-				}				
-			}
-			
-			if (isset($component->templates->template)) {
-				foreach($component->templates->template as $template) {
-					if (!$this->checkIncludeCondition($template)) continue;
-					
-					$this->outTemplate($this->attribute($template, 'name'), $folder . '/' . $this->attribute($template, 'file'));
-				}				
-			}
-			
-			if (isset($component->datasources->datasource)) {
-				$this->out('<script type="text/javascript">');
-				foreach($component->datasources->datasource as $datasource) {
-					if (!$this->checkIncludeCondition($datasource)) continue;
-					
-					$this->outDatasource($this->attribute($datasource, 'name'), $folder . '/' . $this->attribute($datasource, 'file'));
+		if ($this->root->components->component) {
+			foreach($this->root->components->component as $component) {
+				$this->out('<!-- ' . $this->attribute($component, 'name') . '-->');
+				$folder = $this->attribute($component, 'folder');
+
+				if (isset($component->classes->class)) {
+					foreach($component->classes->class as $class) {
+						if (!$this->checkIncludeCondition($class)) continue;
+
+						$filepath = $folder . '/' . $this->attribute($class, 'file');
+						$this->outScript($filepath);
+					}				
 				}
-				$this->out('</script>');				
-			}
+
+				if (isset($component->templates->template)) {
+					foreach($component->templates->template as $template) {
+						if (!$this->checkIncludeCondition($template)) continue;
+
+						$this->outTemplate($this->attribute($template, 'name'), $folder . '/' . $this->attribute($template, 'file'));
+					}				
+				}
+
+				if (isset($component->datasources->datasource)) {
+					$this->out('<script type="text/javascript">');
+					foreach($component->datasources->datasource as $datasource) {
+						if (!$this->checkIncludeCondition($datasource)) continue;
+
+						$this->outDatasource($this->attribute($datasource, 'name'), $folder . '/' . $this->attribute($datasource, 'file'));
+					}
+					$this->out('</script>');				
+				}
+			}			
 		}
 		
 		$this->out('</body></html>');		
