@@ -43,7 +43,7 @@ $.Class.extend("Datasource", {
 		fnDefn += this.content;
 		fnDefn += ';main.apply(this, arguments);return __aDeferred.promise();';		
 		
-		var fn = new Function(this.content);
+		var fn = new Function(fnDefn);
 		return fn.apply(this,arguments);
 	},
 	
