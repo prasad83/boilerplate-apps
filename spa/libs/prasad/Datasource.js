@@ -34,6 +34,15 @@ $.Class.extend("Datasource", {
 	},
 	
 	execute: function(/* arguments */){
+		/* 
+		 * Wrap the content with outer-context to make easy for asynchronous behavior.
+		 * Invoke main function (mandatory implementation)
+		 */
+		var fnDefn = 'var __aDeferred=$.Deferred(), thisInstance=this';
+		fnDefn += ';function done(res, err){thisInstance.setResponse(res,err);__aDeferred.resolve();};';
+		fnDefn += this.content;
+		fnDefn += ';main.apply(this, arguments);return __aDeferred.promise();';		
+		
 		var fn = new Function(this.content);
 		return fn.apply(this,arguments);
 	},
