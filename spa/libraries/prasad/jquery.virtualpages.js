@@ -1,8 +1,7 @@
 /**
+ * Copyright: 2011, http://code.google.com/p/jquery-virtualpages/
+ * License: Apache 2.0
  * Author: Prasad.A
- * Copyright: You are free to use or modify this extension in commercial and non-commercial application
- * However, make sure to keep the information about this copyright and author information. Provide the
- * credits wherever possible.
  */
 ;(function($){
 	

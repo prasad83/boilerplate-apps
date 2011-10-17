@@ -8,14 +8,14 @@
 // Optimization: Avoid calculation
 $__THISDIR__ = dirname(__FILE__);
 
-include_once $__THISDIR__ . '/../../libs/Zend/Json.php';
+include_once $__THISDIR__ . '/../../libraries/Zend/Json.php';
 
-set_include_path($__THISDIR__. '/../../libs/min/lib' . PATH_SEPARATOR . get_include_path());
+set_include_path($__THISDIR__. '/../../libraries/min/lib' . PATH_SEPARATOR . get_include_path());
 include_once 'JSMinPlus.php';
 include_once 'Minify/CSS.php';
 include_once 'Minify/HTML.php';
 
-include_once $__THISDIR__ . '/../../libs/lessphp/lessc.inc.php';
+include_once $__THISDIR__ . '/../../libraries/lessphp/lessc.inc.php';
 
 class PageCreator {
 	
@@ -65,7 +65,7 @@ class PageCreator {
 		// STYLES
 		foreach($this->root->styles->style as $style) {
 			if (!$this->checkIncludeCondition($style)) continue;
-			$this->outStyle($this->attribute($style, 'file'));
+			$this->outStyle($this->attribute($style, 'file'), $this->attribute($style, 'media'));
 		}		
 		$this->out('</head><body>');
 		
@@ -129,21 +129,25 @@ class PageCreator {
 		$fullfilepath = $this->basedir . '/' . $filepath;
 		
 		if (file_exists($fullfilepath)) {
-			$this->out(sprintf('<script type="text/x-jstmpl" data-name="%s">%s</script>', 
-				$name, Minify_HTML::minify(file_get_contents($fullfilepath))
+			$this->out(sprintf('<script type="text/javascript">Template.add("%s", "<div>%s</div>");</script>', 
+				$name, str_replace(array('"', "\n"), array('\"', ''), Minify_HTML::minify(file_get_contents($fullfilepath)))
 			));
 		}
 	}
 	
-	function outStyle($filepath) {
+	function outStyle($filepath, $media='') {
 		
 		$less = false;
 		if (preg_match('/\.less$/', $filepath)) {
 			$less = true;
 		}
 		
+		if (!empty($media)) {
+			$media = 'media="'.$media.'"';
+		}
+		
 		if ($this->debug) {
-			$this->out(sprintf('<link rel="%s" type="text/css" href="%s">', ($less? 'stylesheet/less':'stylesheet'),  $filepath));
+			$this->out(sprintf('<link rel="%s" type="text/css" href="%s" %s>', ($less? 'stylesheet/less':'stylesheet'),  $filepath, $media));
 		} else {
 			$fullfilepath = $this->basedir . '/' . $filepath;
 			
@@ -159,7 +163,7 @@ class PageCreator {
 				$content = $lessCompiler->parse($content);
 			}
 			
-			$this->out('<style type="text/css">');
+			$this->out(sprintf('<style type="text/css" %s>', $media));
 			$this->out(Minify_CSS::minify($content));
 			$this->out('</style>');
 		}
@@ -188,7 +192,6 @@ class PageCreator {
 	
 	function outDatasource($name, $filepath) {
 		
-		$this->out(sprintf('Datasource._defn["%s"] = ', $name));
 		$fullfilepath = $this->basedir . '/' . $filepath;
 		if (!file_exists($fullfilepath)) {
 			$this->out("'; /* FILE NOT FOUND: $filepath */'");
@@ -201,7 +204,7 @@ class PageCreator {
 		$content = substr($content, 14, -1);
 		// End
 		
-		$this->out(Zend_Json::encode($content));
+		$this->out(sprintf('Datasource.add("%s", %s);', $name, Zend_Json::encode($content)));
 		$this->out(';');
 	}
 	

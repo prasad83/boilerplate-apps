@@ -24,3 +24,6 @@ License: MIT
 * minify (http://code.google.com/p/minify/)
 License: http://www.opensource.org/licenses/bsd-license.php
 
+* spine (https://github.com/maccman/spine)
+License: Refer libraries/spine/LICENSE.txt
+

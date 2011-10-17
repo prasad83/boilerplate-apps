@@ -3,10 +3,13 @@
  * License: Apache 2.0
  * Author: Prasad.A
  */
- 
-var Main = {
+
+MainClass = Spine.Class.create({
 	
-	init: function() {
+	init: function() {		
+	},
+	
+	start: function() {
 		Sample.run();
 	},
 	
@@ -23,6 +26,9 @@ var Main = {
 	activePage: function() {
 		return $('.main').activeVirtualPage();
 	}
-}
+});
 
-$(document).ready(Main.init);
+$(document).ready(function() {
+	window.Main = MainClass.init();
+	window.Main.start();
+});

@@ -1,3 +1,9 @@
+/**
+ * Copyright: 2011, http://code.google.com/p/boilerplate-apps/
+ * License: Apache 2.0
+ * Author: Prasad.A
+ */
+
 //////////////////////
 // jQuery Additions //
 //////////////////////

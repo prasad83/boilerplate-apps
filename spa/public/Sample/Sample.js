@@ -1,15 +1,24 @@
-$.Class.extend("Sample", {
+/**
+ * Copyright: 2011, http://code.google.com/p/boilerplate-apps/
+ * License: Apache 2.0
+ * Author: Prasad.A
+ */
+Sample = Spine.Class.create();
+
+Sample.extend({
 	
 	// Static(s)...
 	singleton: false,
 	run: function() {
 		if (!Sample.singleton) {
-			Sample.singleton = new Sample();
+			Sample.singleton = Sample.init();
 		}
 		Sample.singleton.greet();
 	}
 		
-}, {
+});
+
+Sample.include({
 	init: function() {
 		this.page = Main.pushPage();
 		var indexTpl = Template.get('Sample.Index');
