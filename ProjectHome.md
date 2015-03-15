@@ -1,0 +1,1 @@
+Skeleton structure of application to help ease development.
